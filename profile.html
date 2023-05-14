@@ -1,0 +1,229 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+
+
+<title>WEB.aix - edit profile</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.1/dist/css/bootstrap.min.css" rel="stylesheet">
+<style type="text/css">
+    	body{
+    margin-top:20px;
+    background:#f8f8f8
+
+}
+#myVideo{
+  width: 100vw;
+height: 100vh;
+object-fit: cover;
+position:fixed;
+left: 0;
+right: 0;
+top: 0;
+bottom:0;
+z-index:-1;
+}
+h3{
+  color:black;
+  margin-left:1%;
+}
+.card{
+
+    background: linear-gradient(to bottom, #22c2b4,  #2c6add);
+    width:100vw;;
+    width:100vw;;
+  width:95vw;
+  border:solid white 3px;
+  min-width:fit-content;
+  margin-left:0%;
+  min-height:fit-content;
+  color: white;
+
+}
+small{
+  color:white;
+}
+.pass,.logout{
+  color:white
+}
+.pass:hover,.logout:hover{
+  color:white;
+
+}
+body{
+  background: linear-gradient(to bottom, #22c2b4,  #2c6add);
+  width:100vw;
+}
+
+
+    </style>
+</head>
+<body>
+  <a href="/" style="text-decoration:none;"><h3>WEB.aix</h3></a>
+
+
+ 
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+ {% block content %}
+<form class="form" method="POST" enctype="multipart/form-data" action="{% url 'update-profile' %}" >
+    {% csrf_token %}
+   
+<div class="col">
+<div class="row">
+<div class="col mb-3">
+<div class="card">
+
+<div class="card-body">
+<div class="e-profile">
+<div class="row">
+<div class="col-12 col-sm-auto mb-3">
+<div class="mx-auto" style="width: 140px;">
+<div class="d-flex justify-content-center align-items-center rounded" style="height: 140px; background-color: rgb(233, 236, 239);">
+    {% if profile.profile_image %}
+    <img src="{{ profile.profile_image.url }}" alt="{{user.name}}" width=140px height=140px>
+
+{% endif %}
+</div>
+</div>
+</div>
+<div class="col d-flex flex-column flex-sm-row justify-content-between mb-3">
+<div class="text-center text-sm-left mb-2 mb-sm-0">
+<h4 class="pt-sm-2 pb-1 mb-0 text-nowrap">{{profile.name}}</h4>
+<p class="mb-0">@{{user.username}}</p>
+<div class="text-muted"><small>Last seen 2 hours ago</small></div>
+<div class="mt-2">
+    <input class="btn btn-primary" type="file" name="profile_image">
+</div>
+</div>
+<div class="text-center text-sm-right">
+<span class="badge badge-secondary">{{profile.name}}</span>
+<div class="text-muted"><small>Joined 09 Dec 2017</small></div>
+</div>
+</div>
+</div>
+<ul class="nav nav-tabs">
+<li class="nav-item"><a href="{% url 'update-profile' %}" class="active nav-link">Profile</a></li>
+</ul>
+<div class="tab-content pt-3">
+<div class="tab-pane active">
+
+<div class="row">
+<div class="col">
+<div class="row">
+<div class="col">
+<div class="form-group">
+<label>First Name</label>
+<input class="form-control" type="text" name="fname" placeholder="John Smith" value={{profile.fname}} required>
+</div>
+</div>
+<br>
+
+    <div class="col">
+    <div class="form-group">
+    <label>Last Name</label>
+    <input class="form-control" type="text" name="lname" placeholder="John Smith" value={{profile.lname}} required>
+    </div>
+    </div>
+<div class="col">
+<div class="form-group">
+<label>Username</label>
+ <input class="form-control" type="text" name="username" placeholder="johnny.s" value={{user.username}} required>
+</div>
+</div>
+</div>
+<div class="row">
+<div class="col">
+<div class="form-group">
+<label>Email</label>
+<input class="form-control" type="text" placeholder="user@example.com" name='email' value={{user.email}} required>
+</div>
+</div>
+</div>
+<div class="row">
+<div class="col mb-3">
+<div class="form-group">
+<label>About</label>
+<textarea class="form-control" rows="5" placeholder="My Bio" name="bio" required>{{profile.bio}}</textarea><br>
+<div class="col">
+<div class="form-group">
+
+    <div class="col">
+        <div class="form-group">
+        <label for="country">Country :</label>
+        <input class="form-control" type="text" id="country" name="country" value={{profile.country}} >
+          <br>
+
+    <div class="col">
+    <div class="form-group">
+    <label for="occupation">Occupation :</label>
+    <input class="form-control" type="text" id="occupation" name="occupation" value={{profile.occupation}} />
+      <br>
+    </div>
+    </div>
+
+    <div class="col">
+        <div class="form-group">
+        <label for="linkdln">linkdln :</label>
+        <input class="form-control" type="url" id="linkdln" name="lnkDn" value={{profile.linkdln}} >
+          <br>
+        </div>
+        </div>
+<label for="birth_date">Date of Birth :</label>
+<input class="form-control" type="date" id="birth_date" name="birth_date" required>
+  <br>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<a href="" class="pass" style="text-decoration:none;">Change Password</a>
+
+<div class="row">
+<div class="col d-flex justify-content-end">
+<input class="btn btn-primary" type="submit" value="Save changes">
+</div>
+</div>
+</form>
+
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="col-12 col-md-3 mb-3">
+<div class="card mb-3">
+<div class="card-body">
+<div class="px-xl-3">
+<button class="btn btn-block btn-secondary">
+<i class="fa fa-sign-out"></i>
+<a href="{% url 'logout' %}" class="logout" style="text-decoration:none;"><span>Logout</span></a>
+</button>
+</div>
+</div>
+</div>
+<div class="card">
+<div class="card-body">
+<h6 class="card-title font-weight-bold">Support</h6>
+<p class="card-text">Get fast, free help from our friendly assistants.</p>
+<button type="button" class="btn btn-primary">Contact Us</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+{% endblock %}
+<script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.1/dist/js/bootstrap.bundle.min.js"></script>
+<script type="text/javascript">
+	
+</script>
+</body>
+</html>
